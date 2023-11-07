@@ -6,38 +6,39 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 09:11:15 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/03 10:40:16 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/04 09:09:01 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdio.h>
 #include <string.h>
-#include "libft.h"
 
-void	*ft_memchr(const void *string, int track, size_t len )
+void	*ft_memchr(const void *string, int track, size_t len)
 {
-	size_t	index ;
+	size_t	index;
 
-	index = 0 ;
+	index = 0;
 	while (index < len)
 	{
-		if (((unsigned char *)string)[index] == (unsigned char )track)
+		if (((unsigned char *)string)[index] == (unsigned char)track)
 		{
 			return ((void *)string + index);
 		}
-		index++ ;
+		index++;
 	}
 	return (NULL);
 }
 /*
-int main()
+int	main(void)
 {
+	int	caract;
+
 	int  string[] = {1,2,3,3,5,1,2} ;
-	int   caract = 2 ;	
+	caract = 2 ;
 	int *res ;
 	res = ft_memchr(string, caract , 64);
 	printf("%d" , res[0] );
-	return 0 ;
+	return (0);
 }
 */
-

@@ -6,9 +6,11 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:13:28 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/10/30 20:26:14 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/04 22:58:36 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isdigit(int alpha)
 {

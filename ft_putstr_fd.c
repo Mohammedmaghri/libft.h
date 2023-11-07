@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 22:57:55 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/07 10:32:54 by mmaghri          ###   ########.fr       */
+/*   Created: 2023/11/06 09:35:48 by mmaghri           #+#    #+#             */
+/*   Updated: 2023/11/07 10:09:17 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "libft.h"
-#include <string.h>
 
-char	*ft_strchr(const char *string, int cart)
+void	ft_putstr_fd(char *string, int fd)
 {
-	size_t	index ;
-
-	index = 0 ;
 	while (*string)
 	{
-		if (((char *)string)[index] == ((char)cart))
-		{
-			return ((char *)string + index);
-		}
-		string++ ;
+		write(fd, string++, 1);
 	}
-	if ((((char *)string)[index]) == (char)cart)
-	{
-		return ((char *)string + index);
-	}
-	if (!cart)
-	{
-		return (NULL);
-	}
-	return (NULL);
 }

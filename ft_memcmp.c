@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohammdmaghri <mohammdmaghri@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 23:01:55 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/03 10:43:30 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:20:47 by mohammdmagh      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,36 @@
 
 int	ft_memcmp(const void *src, const void *dest, size_t len)
 {
-	unsigned char	*cast_s;
-	unsigned char	*cast_d;
 	size_t			index ;
+	unsigned char	*cst_src;
+	unsigned char	*cst_dest;
 
-	cast_s = (unsigned char *)src ;
-	cast_d = (unsigned char *)dest ;
-	index = 0 ;
-	while (cast_s[index] && cast_d[index] 
-		&& cast_s[index] == cast_d[index] && index < len)
-	{
-		index++;
-	}
-	if (index == len)
+	cst_dest = (unsigned char *)dest ;
+	cst_src = (unsigned char *)src;
+	index = 0;
+	if (!len)
 	{
 		return (0);
 	}
-	return (cast_s[index] - cast_d[index]);
+	while (index < len)
+	{
+		if (cst_src[index] != cst_dest[index])
+		{
+			return (cst_src[index] - cst_dest[index]);
+		}
+		index++;
+	}
+	return (0);
 }
 /*
 int main()
 {
-	unsigned char dt[] = "aha" ;
-	unsigned char st[] = "ahz" ;
+	unsigned char src[] = "aaaz";
+	unsigned char dest[] = "baaa";
 	int res ;
-	res = ft_memcmp(st , dt , 3 );
-	printf("res is %d" , res );
- }
+	res = memcmp(src , dest , 2);
+	printf("%d" , res);
+	return (0);
+}
+
 */

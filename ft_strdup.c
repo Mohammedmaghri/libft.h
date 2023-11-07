@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 22:57:55 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/07 10:32:54 by mmaghri          ###   ########.fr       */
+/*   Created: 2023/11/04 11:20:14 by mmaghri           #+#    #+#             */
+/*   Updated: 2023/11/07 10:18:32 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "libft.h"
 #include <string.h>
+#include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strchr(const char *string, int cart)
+char	*ft_strdup(const char *copystring)
 {
-	size_t	index ;
+	char	*xew;
+	size_t	index;
+	size_t	total;
 
 	index = 0 ;
-	while (*string)
+	total = ft_strlen(copystring);
+	xew = malloc(total + 1);
+	if (!xew)
 	{
-		if (((char *)string)[index] == ((char)cart))
-		{
-			return ((char *)string + index);
-		}
-		string++ ;
+		return (0);
 	}
-	if ((((char *)string)[index]) == (char)cart)
+	while (copystring[index])
 	{
-		return ((char *)string + index);
+		xew[index] = copystring[index];
+		index++ ;
 	}
-	if (!cart)
-	{
-		return (NULL);
-	}
-	return (NULL);
+	xew[index] = '\0';
+	return (xew);
 }
+
+// int main()
+// {
+// 	char string[] = "the" ;
+// 	char *copy ;
+// 	copy = ft_strdup(string);
+// 	printf("%s" , copy);
+// }

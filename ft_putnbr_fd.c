@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 22:57:55 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/07 10:32:54 by mmaghri          ###   ########.fr       */
+/*   Created: 2023/11/06 09:47:53 by mmaghri           #+#    #+#             */
+/*   Updated: 2023/11/07 10:19:51 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "libft.h"
-#include <string.h>
 
-char	*ft_strchr(const char *string, int cart)
+void	ft_putnbr_fd(int num, int fd )
 {
-	size_t	index ;
+	long long int	number ;
 
-	index = 0 ;
-	while (*string)
+	number = num ;
+	if (number < 0)
 	{
-		if (((char *)string)[index] == ((char)cart))
-		{
-			return ((char *)string + index);
-		}
-		string++ ;
+		ft_putchar_fd('-', fd);
+		number *= -1 ;
 	}
-	if ((((char *)string)[index]) == (char)cart)
+	if (number < 10)
 	{
-		return ((char *)string + index);
+		ft_putchar_fd(number + '0', fd);
 	}
-	if (!cart)
+	else if (number >= 10)
 	{
-		return (NULL);
+		ft_putnbr_fd(number / 10, fd);
+		ft_putnbr_fd(number % 10, fd);
 	}
-	return (NULL);
 }
+// int main ()
+// {
+// 	int i = -100 ;
+// 	while (i < 100)
+// 	{
+// 		ft_putnbr_fd(i , 1);
+// 		printf("\n");
+// 		i++ ;
+// 	}
+// }
