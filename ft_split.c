@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:47:16 by mmaghri           #+#    #+#             */
-/*   Updated: 2023/11/07 09:57:24 by mmaghri          ###   ########.fr       */
+/*   Updated: 2023/11/07 15:39:33 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,52 +39,90 @@ static size_t	countword(const char *string, char sep)
 	return (counter);
 }
 
-static char	*thesubstr(const char *string, size_t size)
+static char	**freemory(char **mory, int size)
 {
-	size_t	index;
-	char	*allocation;
+	int	index;
 
-	index = 0;
-	allocation = (char *)malloc((size + 1) * sizeof(char)); 
-	if (!allocation)
-		return (NULL);
+	index = 0 ;
 	while (index < size)
 	{
-		allocation[index] = string[index];
+		free(mory[index]);
 		index++;
 	}
-	allocation[index] = '\0';
-	return (allocation);
+	free(mory);
+	return (NULL);
 }
 
-char	**ft_split(const char *string, char sep)
+int	alloc(char **allocation, char *string, char sep)
 {
 	size_t	index;
 	size_t	start;
 	size_t	end;
-	size_t	wordnumber;
-	char	**allocation;
 
-	wordnumber = countword(string, sep);
-	allocation = (char **)malloc((wordnumber + 1) * sizeof(char *));
 	index = 0;
 	start = 0;
 	end = 0;
-	if (!allocation)
-		return (NULL);
-	while (string[index] && index < wordnumber)
+	while (string[index] && index < countword(string, sep))
 	{
 		while (string[end] && string[end] == sep)
 			end++;
 		start = end;
 		while (string[end] && string[end] != sep)
 			end++;
-		allocation[index] = thesubstr(&string[start], (end - start));
+		allocation[index] = ft_substr(string, start, (end - start));
+		if (!allocation[index])
+		{
+			freemory(allocation, index);
+			return (0);
+		}
 		index++;
 	}
 	allocation[index] = NULL;
+	return (1);
+}
+
+char	**ft_split(const char *string, char sep)
+{
+	char	**allocation;
+	int		i;
+
+	allocation = (char **)malloc((countword(string, sep) + 1)
+			* sizeof(char *));
+	if (!allocation)
+		return (NULL);
+	i = alloc(allocation, (char *)string, sep);
+	if (!i)
+		return (NULL);
 	return (allocation);
 }
+// static char	*thesubstr(const char *string, size_t size)
+// {
+// 	size_t	index;
+// 	char	*allocation;
+
+// 	index = 0;
+// 	allocation = (char *)malloc((size + 1) * sizeof(char)); 
+// 	if (!allocation)
+// 		return (NULL);
+// 	while (index < size)
+// 	{
+// 		allocation[index] = string[index];
+// 		index++;
+// 	}
+// 	allocation[index] = '\0';
+// 	return (allocation);
+// }
+// int main()
+// {
+// 	char **array;
+// 	char string[] = "**hshs**jsjs**jsus8**";
+// 	char sep = '*';
+// 	array = ft_split(string , sep);
+// 	for(int i = 0 ; i < countword(string, sep) ; i++)
+// 	{
+// 			printf("%s\n" ,array[i]);
+// 	}
+// }
 
 // int main() {
 //     const char string[] = "*ssshss*sssa*sdsd*";
