@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "libft.h": "c",
-        "chrono": "c",
-        "string": "c",
-        "iosfwd": "c"
-    }
-}
