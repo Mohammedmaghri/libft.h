@@ -1,4 +1,4 @@
-![Uploading separator.gif…]()
+![separator](https://github.com/Mohammedmaghri/libft.h/assets/135870538/1521b953-bdcd-4726-a002-800d3c02578e)
 
 # libft.h Libft project from 1337--Cursus
 
