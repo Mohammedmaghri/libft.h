@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 22:01:41 by mmaghri           #+#    #+#             */
-/*   Updated: 2024/01/18 21:16:52 by mmaghri          ###   ########.fr       */
+/*   Updated: 2024/01/18 21:49:10 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,20 @@ int find_bottom_index(t_Node **list)
 int check_if_up(t_Node **list, int index)
 {
     t_Node  *all;
-    int list_size;
-    int i ;
-    int position;
-    int res ;
+    int i;
 
-    position = 0;
-    i = -1;
-    list_size = (count_list(*list) / 2);
-    all = (*list);
-    while (all->next != NULL)
+    i = 0;
+    all = *list;
+    while (all && all->index != index)
     {
-        if (all->array == index)
-            break;
-        all = all->next ;
         i++;
+        all = all->next;
     }
-    res = (list_size - i);
-    if (res <= 0)
-        position = -1;
-    printf("******|%d|******\n", res);
-    return (position);
+    return (i);
 }
 void index_all(t_Node **list, t_Node **list_b, t_lspies *lsp)
 {
-    int biggest_value;
+    // int biggest_value;
     int bottom_index;
 
     bottom_index = 0;
@@ -78,22 +67,21 @@ void index_all(t_Node **list, t_Node **list_b, t_lspies *lsp)
         }
     }
     check_tree(list);
-    biggest_value = find_bottom_index(list);
-    while (count_list(*list_b) != 0)
+    // int i = 0;?
+    // int flag = 0;
+    // biggest_value = find_bottom_index(list);
+    while (*list_b)
     {
-        bottom_index = find_bottom_index(list);
-        if (check_if_up((list_b), (*list)->index - 1) == 0)
+        // bottom_index = find_bottom_index(list);
+        while((*list)->index - 1 != (*list_b)->index)
         {
-            while (bottom_index != ((*list_b)->index - 1))
-                ra_rotate(list);
-            pa_push(list, list_b);
+            if (check_if_up((list_b), (*list)->index - 1) < count_list(*list_b))
+                rb_rotate(list_b);
+            else
+                rrb_rotate(list_b);
+            // printf("%d, %d\n", (*list)->index - 1, (*list_b)->index);
         }
-        else
-        {
-            while (bottom_index != ((*list_b)->index - 1))
-                rra_rotate(list);
+        while(*list_b && (*list)->index == (*list_b)->index + 1)
             pa_push(list, list_b);
-        }
-        break ;
     }
 }
