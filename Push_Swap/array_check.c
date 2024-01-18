@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 17:34:38 by mmaghri           #+#    #+#             */
-/*   Updated: 2024/01/14 16:59:51 by mmaghri          ###   ########.fr       */
+/*   Updated: 2024/01/17 21:42:31 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,26 +92,17 @@ int	*convert_to_number(char **string, t_addr *add)
 		free_all(string);
 		exit(1);
 	}
-	while (convert.index < convert.total)
+	while (convert.index < convert.total && convert.increment < convert.total)
 	{
-		number[convert.index] = number_converter(string[convert.index]);
+		if (string[convert.increment][0] == '\0')
+			convert.increment++ ;
+		number[convert.index] = number_converter(string[convert.increment]);
 		convert.index++ ;
+		convert.increment++;
 	}
 	add->address = convert.index;
 	free_all(string);
 	return (number);
-}
-
-int	count_twode_arr(int *arr)
-{
-	int	i ;
-
-	i = 0;
-	while (arr[i])
-	{
-		i++ ;
-	}
-	return (i);
 }
 
 char	*keep_one(char *string)
@@ -141,43 +132,3 @@ char	*keep_one(char *string)
 	free(string);
 	return (allocation);
 }
-// void function_compare(int *arr)
-// {
-//     t_parc  compare;
-
-//     compare.index = 0;
-//     compare.flag = 0;
-//     int increment ;
-//     int total; 
-
-//     total = ;
-//     increment = 0;
-//     while (compare.index < count_twode_arr(&arr))
-//     {
-//         compare.flag = arr[compare.index];
-//         compare.index++ ;
-//         printf("----%d---" ,total);
-//         compare.increment = compare.index ;
-//         while (compare.increment < count_twode_arr(arr))
-//         {
-//             // if (compare.flag == arr[compare.increment])
-//             // {
-//             //     putstr("Error >>");
-//             //     exit(1);
-//             // }
-//             compare.increment++ ;
-//         }
-//     }
-// }
-// char **check_each_array(char **string)
-// {
-//     t_fac   check;
-//     check.puttwode;
-
-//     check.index = 0;
-//     check.total = count_twode(string);
-//     while (string[check.index])
-//     {
-
-//     }
-// }

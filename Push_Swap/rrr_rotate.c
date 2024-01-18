@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 14:42:06 by mmaghri           #+#    #+#             */
-/*   Updated: 2024/01/14 22:25:07 by mmaghri          ###   ########.fr       */
+/*   Updated: 2024/01/18 16:00:24 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	check_greater(int *array, t_addr *add)
 	int	index ;
 	int	flag;
 	int	incre;
+
 	index = 0;
 	flag = array[index];
 	while (index <= add->address)
@@ -35,10 +36,10 @@ void	check_greater(int *array, t_addr *add)
 	exit(0);
 }
 
-void	rra_rotate(Node **list_a)
+void	rra_rotate(t_Node **list_a)
 {
-	Node	*inc ;
-	Node	*var ;
+	t_Node	*inc ;
+	t_Node	*var ;
 
 	if (count_list(*list_a) < 2)
 		return ;
@@ -57,12 +58,13 @@ void	rra_rotate(Node **list_a)
 	var->next = NULL;
 	inc->next = (*list_a);
 	(*list_a) = inc;
+	putstr("rra\n");
 }
 
-void	rrb_rotate(Node **list_b)
+void	rrb_rotate(t_Node **list_b)
 {
-	Node	*head;
-	Node	*position;
+	t_Node	*head;
+	t_Node	*position;
 
 	if (count_list(*list_b) == 1)
 		return ;
@@ -83,7 +85,7 @@ void	rrb_rotate(Node **list_b)
 	(*list_b) = head;
 }
 
-void	rrr_rotate(Node **list_a, Node **list_b)
+void	rrr_rotate(t_Node **list_a, t_Node **list_b)
 {
 	rrb_rotate(list_a);
 	rrb_rotate(list_b);

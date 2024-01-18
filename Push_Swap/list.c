@@ -6,25 +6,26 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 11:19:23 by mmaghri           #+#    #+#             */
-/*   Updated: 2024/01/14 15:06:50 by mmaghri          ###   ########.fr       */
+/*   Updated: 2024/01/18 11:27:06 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	sadd_list(Node *add, int num)
+void	sadd_list(t_Node *add, int num)
 {
-	Node	*str;
+	t_Node	*str;
 
 	str = malloc(sizeof(struct Node));
 	while (add->next != NULL)
 		add = add->next;
 	add->next = str;
 	str->array = num;
+	str->index = 0;
 	str->next = NULL;
 }
 
-void	function_made(int *num, Node *list, t_addr *add)
+void	function_made(int *num, t_Node *list, t_addr *add)
 {
 	t_parc	made;
 
@@ -39,11 +40,14 @@ void	function_made(int *num, Node *list, t_addr *add)
 	}
 }
 
-int	count_list(Node *list)
+int	count_list(t_Node *list)
 {
 	t_parc	count;
 
 	count.index = 1;
+
+	if (!list)
+		return (0);
 	while (list->next != NULL)
 	{
 		list = list->next ;
@@ -52,34 +56,40 @@ int	count_list(Node *list)
 	return (count.index);
 }
 
-void	pb_push(Node **list_a, Node **list_b)
+void	at_linked(t_Node **list)
 {
-	Node	*other ;
-	Node	*point ;
+	t_Node	*link ;
+	t_Node	*temp;
 
-	if (*list_a == NULL)
-		return ;
-	other = (*list_b);
-	point = (*list_a)->next;
-	(*list_b) = (*list_a);
-	(*list_a) = point;
-	(*list_b)->next = other;
-	putstr("pb\n");
+	link = (*list);
+	temp = (*list);
+	while (link)
+	{
+		temp = (*list);
+		while (temp)
+		{
+			if (link->array > temp->array)
+				link->index++;
+			temp = temp->next;
+		}
+		link = link->next;
+	}
 }
 
-void	pa_push(Node **list_a, Node **list_b)
+int	check_sort(t_Node **list)
 {
-	Node	*keep ;
-	Node	*flag ;
-	Node	*move ;
+	t_Node	*all;
+	int		flag;
 
-	if (*list_b == NULL)
-		return ;
-	keep = (*list_a);
-	flag = (*list_b);
-	move = (*list_b)->next;
-	(*list_b) = move;
-	(*list_a) = flag;
-	(*list_a)->next = keep;
-	putstr("pa\n");
+	flag = 0;
+	all = (*list);
+	while (all->next != NULL)
+	{
+		if (all->index > all->next->index)
+			flag = -1;
+		if (flag == -1)
+			return (-1);
+		all = all->next;
+	}
+	return (0);
 }
