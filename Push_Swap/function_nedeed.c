@@ -6,7 +6,7 @@
 /*   By: mmaghri <mmaghri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:58:44 by mmaghri           #+#    #+#             */
-/*   Updated: 2024/01/18 16:59:08 by mmaghri          ###   ########.fr       */
+/*   Updated: 2024/01/18 21:15:08 by mmaghri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,8 @@ int main(int argc, char **argv)
 	// push_positiong(&list, &list_b);
 	// check_tree(&list);
 	// printf("\n\n\n<<<<   With   >>>>>\n\n");
+	int this_res = check_if_up(&list, 8);
+	printf("{---- %d ---}\n", this_res);
 	int rs = check_sort(&list);
 	printf("\n||  %d  ||\n" ,rs);
 	int where = check_highest(&list);
